@@ -8,7 +8,52 @@ generator client {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+  id    String     @id @default(uuid())
+  number String  @unique
+  name  String
+  verfied Boolean    @default(false)
+}
+
+model Admin{
+  id String @id @default(uuid())
+  number String @unique
+  name String
+  verified Boolean @default(false)
+}
+
+model Event{
+  id String @id @default(uuid())
+  name String 
+  description String
+  banner String
+}
+
+model Booking{
+  id String @id @default(uuid())
+  eventId String 
+  userId String
+  seats String
+}
+
+
+
+model SeatType{
+  id String @id @default(uuid())
+  name String
+  description String
+  event String
+  price Int
+}
+
+model Payment{
+  id String @id @default(uuid())
+  eventId String 
+  userId String
+  status PaymentState @default(Pending)
+}
+
+enum PaymentState{
+  Success
+  Fail
+  Pending
 }
